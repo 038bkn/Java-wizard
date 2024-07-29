@@ -1,3 +1,3 @@
-public class WizardWater {
+public class WizardWater extends Wizard {
     
 }
