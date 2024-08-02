@@ -1,15 +1,17 @@
 public abstract class Wizard extends Object {
 
     String name;
-
-    public void heal() {
-        System.out.println("回復させてあげる！");
-    }
+    int hp;
+    int mp;
 
     public void run() {
         System.out.println("逃げろー！！！");
     }
 
-    public abstract void attack();
+    public void heal() {
+        System.out.println("回復させてあげる！");
+    }
+
+    public abstract int attack(int slimeHp);
 
 }
