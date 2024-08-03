@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Main extends Object {
 
-    public static void main(String[] args) {
+    private static Scanner scanner = new Scanner(System.in);
+
+        public static void main(String[] args) {
         
-    Scanner scanner = new Scanner(System.in);
-        
-        try {
+            try {
 
             // 水の魔法使いか火の魔法使いを選択
             System.out.println("呼び出す魔法使いの属性を選択してください。");
@@ -14,7 +14,7 @@ public class Main extends Object {
             System.out.println("2: 火の魔法使い");
             int wizardType = scanner.nextInt();
             Wizard wizard = null; // スコープ外で宣言
-            if (wizardType == 1) {
+                if (wizardType == 1) {
                 // 水の魔法使いを選択
                 wizard = new WizardWater();
             } else if (wizardType == 2) {
