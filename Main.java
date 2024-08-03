@@ -11,15 +11,23 @@ public class Main extends Object {
             // 魔法使いの名前を設定
             setName(wizard);
             // 敵を生成
-            Enemy darkKnight = new DarkKnight();
-            Enemy dragonAvatar = new DragonAvatar();
-            Enemy phantomMessenger = new PhantomMessenger();
+            Enemy[] enemies = new Enemy[] {
+                    new DarkKnight("DarkKnight", 100, 10),
+                    new DragonAvatar("DragonAvatar", 200, 20),
+                    new PhantomMessenger("PhantomMessenger", 300, 30)
+            };
             // 難易度設定
             setDifficulty(wizard);
             // 敵と魔法使いの戦闘
-            battle(wizard, darkKnight);
-            battle(wizard, dragonAvatar);
-            battle(wizard, phantomMessenger);
+            for (Enemy enemy : enemies) {
+                battle(wizard, enemy);
+                if (wizard.hp <= 0) {
+                    System.out.println("GAME OVER");
+                    return;
+                }
+            }
+            System.out.println("すべての敵を倒しました。");
+            System.out.println("GAME CLEAR");
         } finally {
             scanner.close(); // Scannerを閉じる
         }
@@ -96,13 +104,13 @@ public class Main extends Object {
 
             switch (difficulty) {
                 case 1:
-                    wizard.hp = 900;
+                    wizard.setHp(100);
                     return;
                 case 2:
-                    wizard.hp = 30;
+                wizard.setHp(50);
                     return;
                 case 3:
-                    wizard.hp = 50;
+                wizard.setHp(30);
                     return;
                 default:
                     System.out.println("1から3を入力してください。");
@@ -119,30 +127,26 @@ public class Main extends Object {
     public static void battle(Wizard wizard, Enemy enemy) {
         // 敵と魔法使いの戦闘
         System.out.println("GAME START");
+        System.out.println("敵：" + enemy.getName() + "が現れた！");
 
-        while (enemy.hp > 0 && wizard.hp > 0) {
+        while (enemy.getHp() > 0 && wizard.getHp() > 0) {
 
             // 魔法使いの攻撃
-            System.out.println(wizard.name + "の攻撃！");
-            enemy.hp = wizard.attack(enemy.hp);
-            System.out.println("敵のHP：" + enemy.hp);
-            if (enemy.hp <= 0) {
+            System.out.println(wizard.getName() + " の攻撃！");
+            enemy.takeDamage(wizard.attack(enemy.getHp()));
+            System.out.println(enemy.getName() + " のHP：" + enemy.getHp());
+            if (enemy.getHp() <= 0) {
+                System.out.println(enemy.getName() + " を倒した！");
                 break;
             }
 
             // 敵の攻撃
-            wizard.hp = enemy.attack(wizard.name, enemy.attackPower, wizard.hp);
-            System.out.println("敵の反撃！");
-            System.out.println(wizard.name + "のHP：" + wizard.hp);
-            if (wizard.hp <= 0) {
+            System.out.println(enemy.getName() + " の攻撃！");
+            enemy.attack(wizard);
+            System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
+            if (wizard.getHp() <= 0) {
                 break;
             }
-        }
-
-        if (wizard.hp > 0) {
-            System.out.println("GAME CLEAR");
-        } else {
-            System.out.println("GAME OVER");
         }
     }
 }

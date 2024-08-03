@@ -1,18 +1,18 @@
 public class DragonAvatar extends Enemy {
 
-    @Override
-    public int attack(String wizard, int attackPower, int targetHp) {
-        System.out.println("敵の攻撃！");
-        System.out.println(wizard + "に" + attackPower + "ポイントのダメージを与えた！");
-        targetHp -= 15;
-        return targetHp;
+    public DragonAvatar(String name, int hp, int attackPower) {
+        super(name, hp, attackPower);
     }
 
     @Override
-    public int specialAbility(String wizardName, int attackPower, int targetHp) {
-        System.out.println("敵の特殊能力発動！");
-        System.out.println(wizardName + "に" + attackPower + "ポイントのダメージを与えた！");
-        targetHp -= 30;
-        return targetHp;
+    public void attack(Wizard target) {
+        System.out.println(name + " uses Dragon Breath!");
+        target.takeDamage(attackPower);
+    }
+
+    @Override
+    public void specialAbility() {
+        System.out.println(name + " unleashes a powerful roar!");
+        // 特別な能力の実装
     }
 }
