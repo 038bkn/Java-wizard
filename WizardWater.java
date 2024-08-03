@@ -1,11 +1,11 @@
 public class WizardWater extends Wizard {
 
     @Override
-    public int attack(int slimeHp) {
+    public int attack(int targetHp) {
         System.out.println("水鉄砲ぶしゃー！！！");
         System.out.println("スライムに5ポイントのダメージを与えた！");
-        slimeHp -= 5;
-        return slimeHp;
+        targetHp -= 5;
+        return targetHp;
     }
 
 }

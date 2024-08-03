@@ -12,6 +12,6 @@ public abstract class Wizard extends Object {
         System.out.println("回復させてあげる！");
     }
 
-    public abstract int attack(int slimeHp);
+    public abstract int attack(int targetHp);
 
 }
