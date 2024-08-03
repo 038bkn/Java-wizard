@@ -10,12 +10,16 @@ public class Main extends Object {
             Wizard wizard = selectWizard();
             // 魔法使いの名前を設定
             setName(wizard);
-            // スライムを生成
-            Slime slime = new Slime();
+            // 敵を生成
+            Enemy darkKnight = new DarkKnight();
+            Enemy dragonAvatar = new DragonAvatar();
+            Enemy phantomMessenger = new PhantomMessenger();
             // 難易度設定
-            setDifficulty(wizard, slime);
-            // スライムと魔法使いの戦闘
-            battle(wizard, slime);
+            setDifficulty(wizard);
+            // 敵と魔法使いの戦闘
+            battle(wizard, darkKnight);
+            battle(wizard, dragonAvatar);
+            battle(wizard, phantomMessenger);
         } finally {
             scanner.close(); // Scannerを閉じる
         }
@@ -72,9 +76,8 @@ public class Main extends Object {
      * 難易度設定
      * 
      * @param wizard 魔法使い
-     * @param slime  スライム
      */
-    public static void setDifficulty(Wizard wizard, Slime slime) {
+    public static void setDifficulty(Wizard wizard) {
         while (true) {
             // 難易度設定
             System.out.println("難易度を選択してください。");
@@ -93,16 +96,13 @@ public class Main extends Object {
 
             switch (difficulty) {
                 case 1:
-                    wizard.hp = 10;
-                    slime.hp = 10;
+                    wizard.hp = 900;
                     return;
                 case 2:
                     wizard.hp = 30;
-                    slime.hp = 30;
                     return;
                 case 3:
                     wizard.hp = 50;
-                    slime.hp = 50;
                     return;
                 default:
                     System.out.println("1から3を入力してください。");
@@ -111,28 +111,28 @@ public class Main extends Object {
     }
 
     /**
-     * スライムと魔法使いの戦闘
+     * 敵と魔法使いの戦闘
      * 
      * @param wizard 魔法使い
-     * @param slime  スライム
+     * @param enemy  敵
      */
-    public static void battle(Wizard wizard, Slime slime) {
-        // スライムと魔法使いの戦闘
+    public static void battle(Wizard wizard, Enemy enemy) {
+        // 敵と魔法使いの戦闘
         System.out.println("GAME START");
 
-        while (slime.hp > 0 && wizard.hp > 0) {
+        while (enemy.hp > 0 && wizard.hp > 0) {
 
             // 魔法使いの攻撃
             System.out.println(wizard.name + "の攻撃！");
-            slime.hp = wizard.attack(slime.hp);
-            System.out.println("スライムのHP：" + slime.hp);
-            if (slime.hp <= 0) {
+            enemy.hp = wizard.attack(enemy.hp);
+            System.out.println("敵のHP：" + enemy.hp);
+            if (enemy.hp <= 0) {
                 break;
             }
 
-            // スライムの攻撃
-            wizard.hp = slime.attack(wizard.hp);
-            System.out.println("スライムの反撃！");
+            // 敵の攻撃
+            wizard.hp = enemy.attack(wizard.name, enemy.attackPower, wizard.hp);
+            System.out.println("敵の反撃！");
             System.out.println(wizard.name + "のHP：" + wizard.hp);
             if (wizard.hp <= 0) {
                 break;
