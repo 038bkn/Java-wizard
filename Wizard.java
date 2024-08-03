@@ -76,6 +76,7 @@ public abstract class Wizard extends Object {
      */
     public void heal() {
         System.out.println("回復してあげる！");
+        this.hp += 10;
     }
 
     /**
@@ -89,6 +90,6 @@ public abstract class Wizard extends Object {
      * 特殊能力
      * @param targetHp
      */
-    public abstract void specialAbility(int targetHp);
+    public abstract int specialAbility(int targetHp);
 
 }

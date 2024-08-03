@@ -12,15 +12,15 @@ public class Main extends Object {
             setName(scanner, wizard);
             // 敵を生成
             Enemy[] enemies = new Enemy[] {
-                    new DarkKnight("DarkKnight", 100, 10),
-                    new DragonAvatar("DragonAvatar", 200, 20),
-                    new PhantomMessenger("PhantomMessenger", 300, 30)
+                    new DarkKnight("DarkKnight(闇の騎士)", 100, 10),
+                    new DragonAvatar("DragonAvatar(竜の化身)", 200, 20),
+                    new PhantomMessenger("PhantomMessenger(幻影の使者)", 300, 30)
             };
             // 難易度設定
             setDifficulty(scanner, wizard);
             // 敵と魔法使いの戦闘
             for (Enemy enemy : enemies) {
-                battle(wizard, enemy);
+                battle(scanner, wizard, enemy);
                 if (wizard.hp <= 0) {
                     System.out.println("GAME OVER");
                     return;
@@ -126,24 +126,56 @@ public class Main extends Object {
      * @param wizard 魔法使い
      * @param enemy  敵
      */
-    public static void battle(Wizard wizard, Enemy enemy) {
+    public static void battle(Scanner scanner, Wizard wizard, Enemy enemy) {
         // 敵と魔法使いの戦闘
         System.out.println("GAME START");
         System.out.println("敵：" + enemy.getName() + "が現れた！");
 
         while (enemy.getHp() > 0 && wizard.getHp() > 0) {
 
+            // プレイヤーのターン
+            System.out.println(wizard.getName() + " のターン！");
+            System.out.println("1: 通常攻撃");
+            System.out.println("2: 回復");
+            System.out.println("3: 必殺技");
+
+            int action;
+            try {
+                action = scanner.nextInt();
+                scanner.nextLine(); // 改行をクリア
+            } catch (Exception e) {
+                System.out.println("1から3を入力してください。");
+                scanner.next(); // 不正な入力をクリア
+                continue;
+            }
+
+            switch (action) {
+                case 1:
+                    System.out.println(wizard.getName() + " の攻撃！");
+                    enemy.takeDamage(wizard.attack(enemy.getHp()));
+                    break;
+                case 2:
+                    System.out.println(wizard.getName() + " は回復した！");
+                    wizard.heal();
+                    break;
+                case 3:
+                    System.out.println(wizard.getName() + " の必殺技！");
+                    enemy.takeDamage(wizard.specialAbility(enemy.getHp()));
+                    break;            
+                default:
+                    System.out.println("1から3を入力してください。");
+                    continue;
+            }
+
             // 魔法使いの攻撃
-            System.out.println(wizard.getName() + " の攻撃！");
-            enemy.takeDamage(wizard.attack(enemy.getHp()));
             System.out.println(enemy.getName() + " のHP：" + enemy.getHp());
             if (enemy.getHp() <= 0) {
                 System.out.println(enemy.getName() + " を倒した！");
                 break;
             }
 
-            // 敵の攻撃
-            System.out.println(enemy.getName() + " の攻撃！");
+            // 敵のターン
+            System.out.println(enemy.getName() + " のターン！");
             enemy.attack(wizard);
             System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
             if (wizard.getHp() <= 0) {

@@ -22,9 +22,10 @@ public class WizardFire extends Wizard {
      * 特殊能力
      */
     @Override
-    public void specialAbility(int targetHp) {
+    public int specialAbility(int targetHp) {
         System.out.println(name + "は「黒炎の絶対零度【ダークフレイム・アブソリュートゼロ】」を放った！");
         System.out.println("「この一撃で、君の命もこの世界の命運も、全てを燃やし尽くしてしまう！」");
-        this.mp -= 20; // 特殊能力によってMPを消費
+        this.mp -= 20;
+        return 40;
     }
 }
