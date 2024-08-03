@@ -1,8 +1,8 @@
 public abstract class Enemy extends Object {
 
-    public String name;
-    public int hp;
-    public int attackPower;
+    protected String name;
+    protected int hp;
+    protected int attackPower;
 
     /**
      * コンストラクタ
@@ -58,6 +58,6 @@ public abstract class Enemy extends Object {
 
     public abstract void attack(Wizard target);
 
-    public abstract void specialAbility();
+    public abstract void specialAbility(Wizard target);
 
 }

@@ -107,10 +107,10 @@ public class Main extends Object {
                     wizard.setHp(100);
                     return;
                 case 2:
-                wizard.setHp(50);
+                    wizard.setHp(50);
                     return;
                 case 3:
-                wizard.setHp(30);
+                    wizard.setHp(30);
                     return;
                 default:
                     System.out.println("1から3を入力してください。");
@@ -119,7 +119,7 @@ public class Main extends Object {
     }
 
     /**
-     * 敵と魔法使いの戦闘
+     * 戦闘
      * 
      * @param wizard 魔法使い
      * @param enemy  敵
