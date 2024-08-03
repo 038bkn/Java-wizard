@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Main extends Object {
 
-    private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        try {
+        // try-with-resourcesを使用してScannerを自動的に閉じる
+        try (Scanner scanner = new Scanner(System.in)) {
             // 魔法使いを選択
-            Wizard wizard = selectWizard();
+            Wizard wizard = selectWizard(scanner);
             // 魔法使いの名前を設定
-            setName(wizard);
+            setName(scanner, wizard);
             // 敵を生成
             Enemy[] enemies = new Enemy[] {
                     new DarkKnight("DarkKnight", 100, 10),
@@ -17,7 +17,7 @@ public class Main extends Object {
                     new PhantomMessenger("PhantomMessenger", 300, 30)
             };
             // 難易度設定
-            setDifficulty(wizard);
+            setDifficulty(scanner, wizard);
             // 敵と魔法使いの戦闘
             for (Enemy enemy : enemies) {
                 battle(wizard, enemy);
@@ -28,8 +28,8 @@ public class Main extends Object {
             }
             System.out.println("すべての敵を倒しました。");
             System.out.println("GAME CLEAR");
-        } finally {
-            scanner.close(); // Scannerを閉じる
+        } catch (Exception e) {
+            System.out.println("エラーが発生しました。" + e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ public class Main extends Object {
      * 
      * @return 選択した魔法使い
      */
-    public static Wizard selectWizard() {
+    public static Wizard selectWizard(Scanner scanner) {
         while (true) {
             // 水の魔法使いか火の魔法使いを選択
             System.out.println("呼び出す魔法使いの属性を選択してください。");
@@ -48,6 +48,7 @@ public class Main extends Object {
             int wizardType;
             try {
                 wizardType = scanner.nextInt();
+                scanner.nextLine(); // 改行をクリア
             } catch (Exception e) {
                 System.out.println("1か2を入力してください。");
                 scanner.next(); // 不正な入力をクリア
@@ -71,7 +72,7 @@ public class Main extends Object {
      * 
      * @param wizard 魔法使い
      */
-    public static void setName(Wizard wizard) {
+    public static void setName(Scanner scanner, Wizard wizard) {
         // 魔法使いの名前を名前を設定
         System.out.println("魔法使いの名前を入力してください。");
         String name = scanner.next();
@@ -85,7 +86,7 @@ public class Main extends Object {
      * 
      * @param wizard 魔法使い
      */
-    public static void setDifficulty(Wizard wizard) {
+    public static void setDifficulty(Scanner scanner, Wizard wizard) {
         while (true) {
             // 難易度設定
             System.out.println("難易度を選択してください。");
@@ -96,6 +97,7 @@ public class Main extends Object {
             int difficulty;
             try {
                 difficulty = scanner.nextInt();
+                scanner.nextLine(); // 改行をクリア
             } catch (Exception e) {
                 System.out.println("1から3を入力してください。");
                 scanner.next(); // 不正な入力をクリア

@@ -12,7 +12,7 @@ public class WizardFire extends Wizard {
      */
     @Override
     public int attack(int targetHp) {
-        System.out.println(name + " uses Fireball!");
+        System.out.println(name + "は「漆黒の闇の炎【ダークフレイム・マスターストライク】」で攻撃した！");
         this.mp -= 10; // 攻撃によってMPを消費
         return 30; // 攻撃力（固定値または計算された値）
     }
