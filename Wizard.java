@@ -2,15 +2,14 @@ import java.util.Random;
 
 public abstract class Wizard extends Object {
 
-    private Random random;
-    protected String name;
-    protected int hp;
+    private String name;
+    private int hp;
+    private int mp;
+    private String backStory;
     protected int maxHp;
-    protected int mp;
     protected int maxMp;
     protected int normalAttackMpCost;
     protected int specialAttackMpCost;
-    protected String backStory;
 
     /**
      * コンストラクタ
