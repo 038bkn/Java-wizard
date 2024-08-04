@@ -2,18 +2,23 @@ import java.util.Random;
 
 public abstract class Wizard extends Object {
 
-    private String name;
-    private int hp;
-    private int mp;
-    public int maxHp;
+    private Random random;
+    protected String name;
+    protected int hp;
+    protected int maxHp;
+    protected int mp;
+    protected int maxMp;
+    protected int normalAttackMpCost;
+    protected int specialAttackMpCost;
+    protected String backStory;
 
     /**
      * コンストラクタ
      */
-    public Wizard() {
-        super(); // 親クラスのコンストラクタを呼び出す
-        this.hp = 100; // 基本的なHP
-        this.mp = 50; // 基本的なMP
+    public Wizard(String backStory, int mp) {
+        this.backStory = backStory;
+        this.mp = mp;
+        this.maxMp = mp;
     }
 
     /**
@@ -70,8 +75,23 @@ public abstract class Wizard extends Object {
         this.mp = mp;
     }
 
+    public String getBackStory() {
+        return this.backStory;
+    }
+
+    /**
+     * 背景を設定
+     * 
+     * @param backstory
+     */
+    public void printBackstory() {
+        System.out.println("【" + this.name + "の背景】");
+        System.out.println(this.backStory);
+    }
+
     /**
      * MPを消費
+     * 
      * @param mpCost 消費MP
      * @return currentMp - mpCost
      */
@@ -95,16 +115,18 @@ public abstract class Wizard extends Object {
 
     /**
      * 回復
+     * @param random 乱数生成
+     * @return healAmount
      */
-    public int heal() {
-        if (this.hp == this.maxHp) { // HPが満タンの場合
-            return 0; // 回復しないため0を返す
+    public int heal(Random random) {
+        if (hp < maxHp) {
+            int healAmount = random.nextInt(20) + 10; // 10-30回復
+            hp = Math.min(hp + healAmount, maxHp); // HPが最大値を超えないようにする
+            return healAmount;
+        } else {
+            System.out.println("HPが満タンです。");
+            return 0;
         }
-        int healAmount = 20; // 回復量を設定
-        System.out.println("回復しちゃお！");
-        this.hp = Math.min(this.hp + healAmount, this.maxHp); // HPを回復し、最大HPを超えないようにする
-        consumeMp(10); // 回復によってMPを消費
-        return healAmount; // 回復量を返す
     }
 
     /**
@@ -114,45 +136,41 @@ public abstract class Wizard extends Object {
      * @return targetHp
      */
     public int attack(Random random, int targetHp) {
-        int attackType = Main.random.nextInt(3); // 0～2の乱数を生成
-        switch (attackType) {
-            case 0:
-                return attack1(targetHp);
-            case 1:
-                return attack2(targetHp);
-            case 2:
-                return attack3(targetHp);     
-            default:
-                return 0; // ここには到達しないはず
+        if (mp >= normalAttackMpCost) {
+            mp -= normalAttackMpCost;
+            int attackType = Main.random.nextInt(3); // 0～2の乱数を生成
+            switch (attackType) {
+                case 0:
+                    return attack1(random);
+                case 1:
+                    return attack2(random);
+                case 2:
+                    return attack3(random);
+            }
+        } else {
+            System.out.println("MPが足りないため、通常攻撃ができません。");
         }
+        return 0;
     }
-
-    /**
-     * 攻撃1
-     * @param targetHp 相手のHP
-     * @return targetHp
-     */
-    protected abstract int attack1(int targetHp);
-    
-    /**
-     * 攻撃2
-     * @param targetHp 相手のHP
-     * @return targetHp
-     */
-    protected abstract int attack2(int targetHp);
-
-    /**
-     * 攻撃3
-     * @param targetHp 相手のHP
-     * @return targetHp
-     */
-    protected abstract int attack3(int targetHp);
 
     /**
      * 特殊能力
      * 
      * @param targetHp
      */
-    public abstract int specialAbility(int targetHp);
+    public int specialAbility(Random random, int enemyHp) {
+        if (mp >= specialAttackMpCost) {
+            mp -= specialAttackMpCost;
+            return random.nextInt(21) + 50; // 50-70ダメージ
+        } else {
+            System.out.println("MPが足りないため、特殊能力が使えません。");
+        }
+        return 0;
+    }
+
+    // 抽象メソッドとして宣言
+    public abstract int attack1(Random random);
+    public abstract int attack2(Random random);
+    public abstract int attack3(Random random);
 
 }
