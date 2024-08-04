@@ -10,21 +10,38 @@ public class DragonAvatar extends Enemy {
         super(name, hp, attackPower);
     }
 
-    /**
-     * 攻撃
-     */
     @Override
-    public void attack(Wizard target) {
-        System.out.println(name + " uses Dragon Breath!");
-        target.takeDamage(attackPower);
+    public int attack1(int target) {
+        System.out.println(getName() + "は「炎の吐息（Flame Breath）」で攻撃した！");
+        System.out.println("「灼熱の炎が、お前を焼き尽くす！」");
+
+        return 30;
+    }
+
+    @Override
+    public int attack2(int target) {
+        System.out.println(getName() + "は「鱗の嵐（Scale Storm）」を使った！");
+        System.out.println("「竜の鱗の嵐に、逃れる術はない！」");
+
+        return 25;
+    }
+
+    @Override
+    public int attack3(int target) {
+        System.out.println(getName() + "は「竜神の怒り（Dragon God's Wrath）」で攻撃した！");
+        System.out.println("「竜神の怒りを、今ここに解き放つ！」");
+
+        return 30;
     }
 
     /**
      * 特殊能力
      */
     @Override
-    public void specialAbility(Wizard target) {
-        System.out.println(name + " unleashes a powerful roar!");
-        // 特別な能力の実装
+    public int specialAbility(Wizard target) {
+        System.out.println(getName() + "は「竜炎の審判（Dragon's Judgement）」を放った！");
+        System.out.println(" 「竜神の怒りが天を裂く！お前の運命もここで終わる！」");
+
+        return 40;
     }
 }

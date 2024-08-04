@@ -1,8 +1,9 @@
+import java.util.Random;
+
 public abstract class Enemy extends Object {
 
-    protected String name;
-    protected int hp;
-    protected int attackPower;
+    private String name;
+    private int hp;
 
     /**
      * コンストラクタ
@@ -14,7 +15,6 @@ public abstract class Enemy extends Object {
     public Enemy(String name, int hp, int attackPower) {
         this.name = name;
         this.hp = hp;
-        this.attackPower = attackPower;
     }
 
     /**
@@ -56,8 +56,33 @@ public abstract class Enemy extends Object {
         return this.hp > 0;
     }
 
-    public abstract void attack(Wizard target);
+    /**
+     * 攻撃
+     * 
+     * @param random   乱数生成
+     * @param targetHp 相手のHP
+     * @return targetHp
+     */
+    public int attack(Random random, int targetHp) {
+        int attackType = Main.random.nextInt(3); // 0～2の乱数を生成
+        switch (attackType) {
+            case 0:
+                return attack1(targetHp);
+            case 1:
+                return attack2(targetHp);
+            case 2:
+                return attack3(targetHp);
+            default:
+                return 0; // ここには到達しないはず
+        }
+    }
 
-    public abstract void specialAbility(Wizard target);
+    protected abstract int attack1(int targetHp);
+
+    protected abstract int attack2(int targetHp);
+
+    protected abstract int attack3(int targetHp);
+
+    public abstract int specialAbility(Wizard targetHp);
 
 }

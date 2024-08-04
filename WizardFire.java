@@ -4,18 +4,49 @@ public class WizardFire extends Wizard {
      * コンストラクタ
      */
     public WizardFire() {
-        super();
+        super(); // 親クラスのコンストラクタを呼び出す
     }
 
     /**
-     * 攻撃
+     * 攻撃1
+     * @param targetHp 相手のHP
+     * @return targetHp
      */
     @Override
-    public int attack(int targetHp) {
-        System.out.println(name + "は「漆黒の闇の炎【ダークフレイム・マスターストライク】」で攻撃した！");
+    protected int attack1(int targetHp) {
+        System.out.println(super.getName() + "は「漆黒の闇の炎【ダークフレイム・マスターストライク】」で攻撃した！");
         System.out.println("「漆黒の炎が、全てを飲み込み尽くす！この闇の力を思い知るがいい！」");
-        this.mp -= 10; // 攻撃によってMPを消費
-        return 30; // 攻撃力（固定値または計算された値）
+
+        consumeMp(10); // 攻撃によってMPを消費
+        return 30;// 攻撃力
+    }
+
+    /**
+     * 攻撃2
+     * @param targetHp 相手のHP
+     * @return targetHp
+     */
+    @Override
+    protected int attack2(int targetHp) {
+        System.out.println(super.getName() + "は「煉獄の業火（ピュリファイア）」で攻撃した！");
+        System.out.println("「炎の剣が、君の全てを焼き尽くす！その熱さを感じるがいい！」");
+
+        consumeMp(10); // 攻撃によってMPを消費
+        return 25;// 攻撃力
+    }
+
+    /**
+     * 攻撃3
+     * @param targetHp 相手のHP
+     * @return targetHp
+     */
+    @Override
+    protected int attack3(int targetHp) {
+        System.out.println(super.getName() + "は「紅蓮の爆裂（クリムゾンデトネーション）」で攻撃した！");
+        System.out.println("「炎の槍が、君の全てを焼き尽くす！その熱さを感じるがいい！」");
+
+        consumeMp(10); // 攻撃によってMPを消費
+        return 30;// 攻撃力
     }
 
     /**
@@ -23,9 +54,10 @@ public class WizardFire extends Wizard {
      */
     @Override
     public int specialAbility(int targetHp) {
-        System.out.println(name + "は「黒炎の絶対零度【ダークフレイム・アブソリュートゼロ】」を放った！");
+        System.out.println(super.getName() + "は「黒炎の絶対零度【ダークフレイム・アブソリュートゼロ】」を放った！");
         System.out.println("「この一撃で、君の命もこの世界の命運も、全てを燃やし尽くしてしまう！」");
-        this.mp -= 20;
-        return 40;
+
+        consumeMp(20); // 攻撃によってMPを消費
+        return 40;// 攻撃力
     }
 }

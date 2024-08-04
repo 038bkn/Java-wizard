@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main extends Object {
 
+    public static Random random = new Random(); // Randomクラスのインスタンスを生成
 
     public static void main(String[] args) {
         // try-with-resourcesを使用してScannerを自動的に閉じる
@@ -21,7 +23,11 @@ public class Main extends Object {
             // 敵と魔法使いの戦闘
             for (Enemy enemy : enemies) {
                 battle(scanner, wizard, enemy);
-                if (wizard.hp <= 0) {
+                if (wizard.getMp() <= 0) {
+                    System.out.println("MPが尽きてしまいました。");
+                    System.out.println("GAME OVER");
+                    return;
+                } else if (wizard.getHp() <= 0) {
                     System.out.println("GAME OVER");
                     return;
                 }
@@ -73,12 +79,13 @@ public class Main extends Object {
      * @param wizard 魔法使い
      */
     public static void setName(Scanner scanner, Wizard wizard) {
+        System.out.println(); // 改行
         // 魔法使いの名前を名前を設定
         System.out.println("魔法使いの名前を入力してください。");
         String name = scanner.next();
-        wizard.name = name;
+        wizard.setName(name);
         // 魔法使いの名前を表示
-        System.out.println("魔法使いの名前は" + wizard.name + "です。");
+        System.out.println("魔法使いの名前は" + wizard.getName() + "です。\n");
     }
 
     /**
@@ -107,17 +114,26 @@ public class Main extends Object {
             switch (difficulty) {
                 case 1:
                     wizard.setHp(100);
+                    wizard.maxHp = wizard.getHp();
                     return;
                 case 2:
                     wizard.setHp(50);
+                    wizard.maxHp = wizard.getHp();
                     return;
                 case 3:
                     wizard.setHp(30);
+                    wizard.maxHp = wizard.getHp();
                     return;
                 default:
                     System.out.println("1から3を入力してください。");
             }
         }
+    }
+
+    public static void printStatus(Wizard wizard, Enemy enemy) {
+        System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
+        System.out.println(wizard.getName() + " のMP：" + wizard.getMp());
+        System.out.println(enemy.getName() + " のHP：" + enemy.getHp() + "\n");
     }
 
     /**
@@ -127,9 +143,14 @@ public class Main extends Object {
      * @param enemy  敵
      */
     public static void battle(Scanner scanner, Wizard wizard, Enemy enemy) {
+
         // 敵と魔法使いの戦闘
-        System.out.println("GAME START");
-        System.out.println("敵：" + enemy.getName() + "が現れた！");
+        System.out.println();
+        System.out.println("┏━━━━━━━━━━━━┓");
+        System.out.println("┃ GAME START ┃");
+        System.out.println("┗━━━━━━━━━━━━┛\n");
+        System.out.println("敵：" + enemy.getName() + "が現れた！\n");
+        printStatus(wizard, enemy);
 
         while (enemy.getHp() > 0 && wizard.getHp() > 0) {
 
@@ -151,24 +172,38 @@ public class Main extends Object {
 
             switch (action) {
                 case 1:
+                    System.out.println(); // 改行
                     System.out.println(wizard.getName() + " の攻撃！");
-                    enemy.takeDamage(wizard.attack(enemy.getHp()));
+                    int damage = wizard.attack(random, enemy.getHp());
+                    enemy.takeDamage(damage);
+                    System.out.println("敵に" + damage + "のダメージを与えた！");
                     break;
                 case 2:
+                    System.out.println(); // 改行
                     System.out.println(wizard.getName() + " は回復した！");
-                    wizard.heal();
-                    break;
+                    int healAmount = wizard.heal();
+                    printStatus(wizard, enemy);
+                    if (healAmount > 0) {
+                        System.out.println(wizard.getName() + " は" + healAmount + "回復した！");
+                    } else {
+                        System.out.println("しかし、" + wizard.getName() + "のHPは満タンだ！");
+                        System.out.println("もう一度選ばせてあげるっ！\n");
+                    }
+                    continue; // ターンを終了
                 case 3:
                     System.out.println(wizard.getName() + " の必殺技！");
-                    enemy.takeDamage(wizard.specialAbility(enemy.getHp()));
-                    break;            
+                    int specialDamage = wizard.specialAbility(enemy.getHp());
+                    enemy.takeDamage(specialDamage);
+                    System.out.println(wizard.getName() + " は" + enemy.getName() + "に" + specialDamage + "のダメージを与えた！");
+                    break;
                 default:
                     System.out.println("1から3を入力してください。");
                     continue;
             }
 
             // 魔法使いの攻撃
-            System.out.println(enemy.getName() + " のHP：" + enemy.getHp());
+            System.out.println(); // 改行
+            printStatus(wizard, enemy);
             if (enemy.getHp() <= 0) {
                 System.out.println(enemy.getName() + " を倒した！");
                 break;
@@ -176,8 +211,11 @@ public class Main extends Object {
 
             // 敵のターン
             System.out.println(enemy.getName() + " のターン！");
-            enemy.attack(wizard);
-            System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
+            int damage = enemy.attack(random, wizard.getHp());
+            wizard.takeDamage(damage);
+            System.out.println(enemy.getName() + " は" + wizard.getName() + " に" + damage + "のダメージを与えた！");
+            System.out.println(); // 改行
+            printStatus(wizard, enemy);
             if (wizard.getHp() <= 0) {
                 break;
             }
