@@ -223,7 +223,7 @@ public class GameUtils extends Object {
     }
 
     /**
-     * ストーリーを開始
+     * ストーリーの開始
      */
     public static void startStory() {
         System.out.println("\n∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴");
