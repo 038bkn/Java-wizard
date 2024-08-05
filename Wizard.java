@@ -74,6 +74,11 @@ public abstract class Wizard extends Object {
         this.mp = mp;
     }
 
+    /**
+     * 背景を取得
+     * 
+     * @return backStory
+     */
     public String getBackStory() {
         return this.backStory;
     }
