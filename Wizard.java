@@ -114,23 +114,31 @@ public abstract class Wizard extends Object {
 
     /**
      * 回復
+     * 
      * @param random 乱数生成
-     * @return healAmount
+     * @return healAmount 回復量
      */
     public int heal(Random random) {
-        if (hp < maxHp) {
-            int healAmount = random.nextInt(20) + 10; // 10-30回復
-            hp = Math.min(hp + healAmount, maxHp); // HPが最大値を超えないようにする
-            return healAmount;
+        if (mp >= normalAttackMpCost) {
+            if (hp < maxHp) {
+                int healAmount = random.nextInt(20) + 10; // 10-30回復
+                hp = Math.min(hp + healAmount, maxHp); // HPが最大値を超えないようにする
+                mp -= normalAttackMpCost; // 回復によってMPを消費
+                return healAmount; // 回復量を返す
+            } else {
+                System.out.println("HPが満タンです。");
+                return 0;
+            }
         } else {
-            System.out.println("HPが満タンです。");
+            System.out.println("MPが足りないため、回復ができません。");
             return 0;
         }
     }
 
     /**
      * 攻撃
-     * @param random 乱数生成
+     * 
+     * @param random   乱数生成
      * @param targetHp 相手のHP
      * @return targetHp
      */
@@ -169,7 +177,9 @@ public abstract class Wizard extends Object {
 
     // 抽象メソッドとして宣言
     public abstract int attack1(Random random);
+
     public abstract int attack2(Random random);
+
     public abstract int attack3(Random random);
 
 }
