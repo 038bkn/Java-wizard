@@ -25,9 +25,9 @@ public class Main extends Object {
 
             // 敵を生成
             Enemy[] enemies = new Enemy[] {
-                    new DarkKnight("DarkKnight(闇の騎士)", 100, 10),
-                    new DragonAvatar("DragonAvatar(竜の化身)", 200, 20),
-                    new PhantomMessenger("PhantomMessenger(幻影の使者)", 300, 30)
+                    new DarkKnight("DarkKnight(闇の騎士)", 70, 5),
+                    new DragonAvatar("DragonAvatar(竜の化身)", 100, 10),
+                    new PhantomMessenger("PhantomMessenger(幻影の使者)", 130, 15)
             };
 
             // 敵と魔法使いの戦闘
@@ -36,7 +36,10 @@ public class Main extends Object {
                 characterDialogue(wizard, enemies[i]);
                 battle(scanner, wizard, enemies[i]);
 
-                if (wizard.getMp() <= 0) {
+                if (wizard.getHp() <= 0) {
+                    endStory(false);
+                    return;
+                } else if (wizard.getMp() <= 0) {
                     endStory(false);
                     return;
                 }
@@ -126,10 +129,10 @@ public class Main extends Object {
                 case 1:
                     wizard.setHp(150);
                     wizard.maxHp = wizard.getHp();
-                    wizard.setMp(1000);
+                    wizard.setMp(100);
                     wizard.maxMp = wizard.getMp();
-                    wizard.normalAttackMpCost = 10;
-                    wizard.specialAttackMpCost = 30;
+                    wizard.normalAttackMpCost = 3;
+                    wizard.specialAttackMpCost = 10;
                     return;
                 case 2:
                     wizard.setHp(100);
@@ -211,9 +214,9 @@ public class Main extends Object {
                 case 2:
                     System.out.println(); // 改行
                     System.out.println(wizard.getName() + " は回復した！");
-                    int healAmount = wizard.heal(random);
-                    printStatus(wizard, enemy);
-                    if (healAmount > 0) {
+                    int healAmount = wizard.heal(random); // 回復
+                    printStatus(wizard, enemy); // ステータスを表示
+                    if (healAmount > 0) { // 回復した場合
                         System.out.println(wizard.getName() + " は" + healAmount + "回復した！");
                     } else {
                         System.out.println("しかし、" + wizard.getName() + "のHPは満タンだ！");
