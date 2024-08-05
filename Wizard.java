@@ -147,7 +147,7 @@ public abstract class Wizard extends Object {
     public int attack(Random random, int targetHp) {
         if (mp >= normalAttackMpCost) {
             mp -= normalAttackMpCost;
-            int attackType = Main.random.nextInt(3); // 0～2の乱数を生成
+            int attackType = random.nextInt(3); // 0～2の乱数を生成
             switch (attackType) {
                 case 0:
                     return attack1(random);
