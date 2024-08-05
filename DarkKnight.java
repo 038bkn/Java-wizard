@@ -10,6 +10,9 @@ public class DarkKnight extends Enemy {
         super(name, hp, attackPower);
     }
 
+    /**
+     * 攻撃手段1
+     */
     @Override
     public int attack1(int target) {
         System.out.println(getName() + "は「闇の一閃（Dark Slash）」で攻撃した！");
@@ -18,6 +21,9 @@ public class DarkKnight extends Enemy {
         return 30;
     }
 
+    /**
+     * 攻撃手段2
+     */
     @Override
     public int attack2(int target) {
         System.out.println(getName() + "は「影の突撃（Shadow Charge）」を使った！");
@@ -26,6 +32,9 @@ public class DarkKnight extends Enemy {
         return 25;
     }
 
+    /**
+     * 攻撃手段3
+     */
     @Override
     public int attack3(int target) {
         System.out.println(getName() + "は「魔黒の剣舞（Cursed Blade Dance）」で攻撃した！");

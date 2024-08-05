@@ -11,6 +11,9 @@ public class PhantomMessenger extends Enemy {
         super(name, hp, attackPower);
     }
 
+    /**
+     * 攻撃手段1
+     */
     @Override
     public int attack1(int target) {
         System.out.println(getName() + "は「幻影の刃（Phantom Blade）」で攻撃した！");
@@ -19,6 +22,9 @@ public class PhantomMessenger extends Enemy {
         return 30;
     }
 
+    /**
+     * 攻撃手段2
+     */
     @Override
     public int attack2(int target) {
         System.out.println(getName() + "は「霧の抱擁（Embrace of Mist）」を使った！");
@@ -27,6 +33,9 @@ public class PhantomMessenger extends Enemy {
         return 25;
     }
 
+    /**
+     * 攻撃手段3
+     */
     @Override
     public int attack3(int target) {
         System.out.println(getName() + "は「亡霊の囁き（Whisper of the Dead）」で攻撃した！");

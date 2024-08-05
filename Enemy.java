@@ -48,15 +48,6 @@ public abstract class Enemy extends Object {
     }
 
     /**
-     * 生存判定
-     * 
-     * @return
-     */
-    public boolean isAlive() {
-        return this.hp > 0;
-    }
-
-    /**
      * 攻撃
      * 
      * @param random   乱数生成

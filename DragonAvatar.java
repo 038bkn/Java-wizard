@@ -2,6 +2,7 @@ public class DragonAvatar extends Enemy {
 
     /**
      * コンストラクタ
+     * 
      * @param name
      * @param hp
      * @param attackPower
@@ -10,6 +11,9 @@ public class DragonAvatar extends Enemy {
         super(name, hp, attackPower);
     }
 
+    /**
+     * 攻撃手段1
+     */
     @Override
     public int attack1(int target) {
         System.out.println(getName() + "は「炎の吐息（Flame Breath）」で攻撃した！");
@@ -18,6 +22,9 @@ public class DragonAvatar extends Enemy {
         return 30;
     }
 
+    /**
+     * 攻撃手段2
+     */
     @Override
     public int attack2(int target) {
         System.out.println(getName() + "は「鱗の嵐（Scale Storm）」を使った！");
@@ -26,6 +33,9 @@ public class DragonAvatar extends Enemy {
         return 25;
     }
 
+    /**
+     * 攻撃手段3
+     */
     @Override
     public int attack3(int target) {
         System.out.println(getName() + "は「竜神の怒り（Dragon God's Wrath）」で攻撃した！");
