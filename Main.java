@@ -25,9 +25,9 @@ public class Main extends Object {
 
             // 敵を生成
             Enemy[] enemies = new Enemy[] {
-                    new DarkKnight("DarkKnight(闇の騎士)", 70, 5),
-                    new DragonAvatar("DragonAvatar(竜の化身)", 100, 10),
-                    new PhantomMessenger("PhantomMessenger(幻影の使者)", 130, 15)
+                    new DarkKnight("闇の騎士(DarkKnight)", 70, 5),
+                    new DragonAvatar("竜の化身(DragonAvatar)", 100, 10),
+                    new PhantomMessenger("幻影の使者(PhantomMessenger)", 130, 15)
             };
 
             // 敵と魔法使いの戦闘
@@ -60,9 +60,11 @@ public class Main extends Object {
 
         while (true) {
             // 水の魔法使いか火の魔法使いを選択
-            System.out.println("呼び出す魔法使いの属性を選択してください。");
-            System.out.println("1: 水の魔法使い");
-            System.out.println("2: 火の魔法使い");
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.println("┃    魔法使いの属性を選択してください     ┃");
+            System.out.println("┃    1: 水の魔法使い                      ┃");
+            System.out.println("┃    2: 火の魔法使い                      ┃");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
             int wizardType;
             try {
@@ -94,11 +96,11 @@ public class Main extends Object {
     public static void setName(Scanner scanner, Wizard wizard) {
         System.out.println(); // 改行
         // 魔法使いの名前を名前を設定
-        System.out.println("魔法使いの名前を入力してください。");
+        System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+        System.out.println("┃    魔法使いの名前を入力してください     ┃");
+        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         String name = scanner.next();
         wizard.setName(name);
-        // 魔法使いの名前を表示
-        System.out.println("魔法使いの名前は" + wizard.getName() + "です。\n");
     }
 
     /**
@@ -109,11 +111,12 @@ public class Main extends Object {
     public static void setDifficulty(Scanner scanner, Wizard wizard) {
         while (true) {
             // 難易度設定
-            System.out.println(); // 改行
-            System.out.println("難易度を選択してください。");
-            System.out.println("1: かんたん");
-            System.out.println("2: ふつう");
-            System.out.println("3: むずかしい");
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.println("┃    難易度を選択してください             ┃");
+            System.out.println("┃    1: かんたん                          ┃");
+            System.out.println("┃    2: ふつう                            ┃");
+            System.out.println("┃    3: むずかしい                        ┃");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
             int difficulty;
             try {
@@ -163,8 +166,11 @@ public class Main extends Object {
      * @param enemy  敵
      */
     public static void printStatus(Wizard wizard, Enemy enemy) {
-        System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
-        System.out.println(wizard.getName() + " のMP：" + wizard.getMp());
+        System.out.println("+‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥+");
+        System.out.println("     あなたのステータス                ");
+        System.out.println("     HP：" + wizard.getHp() + "        ");
+        System.out.println("     MP：" + wizard.getMp() + "        ");
+        System.out.println("+‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥+\n");
         System.out.println(enemy.getName() + " のHP：" + enemy.getHp() + "\n");
     }
 
@@ -187,10 +193,12 @@ public class Main extends Object {
         while (enemy.getHp() > 0 && wizard.getHp() > 0) {
 
             // プレイヤーのターン
-            System.out.println(wizard.getName() + " のターン！");
-            System.out.println("1: 通常攻撃");
-            System.out.println("2: 回復");
-            System.out.println("3: 必殺技");
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.println("┃   あなたのターン             ┃");
+            System.out.println("┃   1: 通常攻撃                ┃");
+            System.out.println("┃   2: 回復                    ┃");
+            System.out.println("┃   3: 必殺技                  ┃");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
             int action;
             try {
@@ -251,7 +259,11 @@ public class Main extends Object {
             System.out.println(); // 改行
             printStatus(wizard, enemy);
             if (wizard.getHp() <= 0) {
-                break;
+                System.out.println(wizard.getName() + " は倒れた…");
+            } else if (wizard.getMp() <= 0) {
+                System.out.println(wizard.getName() + " は力尽きた…");
+            } else {
+                System.out.println("次のターン！");
             }
         }
     }
@@ -260,43 +272,71 @@ public class Main extends Object {
      * ストーリーを開始
      */
     public static void startStory() {
-        System.out.println("遠い昔、世界は光と闇の均衡により保たれていた…");
-        System.out.println("しかし、闇の勢力がその均衡を破り、世界を混沌に陥れた。");
-        System.out.println("あなたは禁忌の力を持つ魔法使いとして、この闇を打ち破る使命を背負うことになった。");
-        System.out.println("古の魔導書に記された力を駆使し、世界を救う旅に出るのだ。\n");
+        System.out.println("\n∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴");
+        System.out.println("  遠い昔、世界は光と闇の均衡により     ");
+        System.out.println("  保たれていた…                        ");
+        System.out.println("  しかし、千年に一度の月蝕の夜、       ");
+        System.out.println("  闇の勢力がその均衡を破り、           ");
+        System.out.println("  世界を混沌に陥れた。                 ");
+        System.out.println("  あなたは古の魔導士の血を引く         ");
+        System.out.println("  最後の継承者であり、禁忌の力を持つ   ");
+        System.out.println("  魔法使いとして、この闇を打ち破る     ");
+        System.out.println("  使命を背負うことになった。           ");
+        System.out.println("  古の魔導書『アーク・グリモワール』に ");
+        System.out.println("  記された力を駆使し、世界を救う旅に   ");
+        System.out.println("  出るのだ。                           ");
+        System.out.println("∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n");
     }
 
     /**
      * 敵ごとのステージの説明
+     * 
      * @param stage ステージ
      */
     public static void advanceStory(int stage) {
         switch (stage) {
             case 1:
                 System.out.println(); // 改行
-                System.out.println("【ステージ1】暗黒の森");
-                System.out.println("あなたは闇の勢力が潜む暗黒の森に足を踏み入れた。");
-                System.out.println("突然、影のような生物が襲いかかってきた！");
+                System.out.println("─────────────────────────────────────────────────────");
+                System.out.println("                    Chapter " + stage);
+                System.out.println("                      暗黒の森");
+                System.out.println("    あなたは闇の勢力が潜む暗黒の森に足を踏み入れた。");
+                System.out.println("        突然、影のような生物が襲いかかってきた！");
+                System.out.println("─────────────────────────────────────────────────────");
+
                 break;
             case 2:
                 System.out.println(); // 改行
-                System.out.println("【ステージ2】封印の洞窟");
-                System.out.println("洞窟の奥深く、強力な魔物が封印されている。");
-                System.out.println("あなたはその封印を解き、古の力を手に入れなければならない。");
+                System.out.println("──────────────────────────────────────────────────────────────────");
+                System.out.println("                            Chapter " + stage);
+                System.out.println("                              封印の洞窟");
+                System.out.println("                 洞窟の奥深く、強力な魔物が封印されている。");
+                System.out.println("        あなたはその封印を解き、古の力を手に入れなければならない。");
+                System.out.println("──────────────────────────────────────────────────────────────────");
+                // System.out.println("【ステージ2】封印の洞窟");
+                // System.out.println("洞窟の奥深く、強力な魔物が封印されている。");
+                // System.out.println("あなたはその封印を解き、古の力を手に入れなければならない。");
                 break;
             case 3:
                 System.out.println(); // 改行
-                System.out.println("【ステージ3】終焉の城");
-                System.out.println("闇の勢力の本拠地、終焉の城に辿り着いた。");
-                System.out.println("ここで最終決戦が待ち受けている。");
+                System.out.println("────────────────────────────────────────────────────");
+                System.out.println("               Chapter " + stage);
+                System.out.println("                 終焉の城");
+                System.out.println("      闇の勢力の本拠地、終焉の城に辿り着いた。");
+                System.out.println("          ここで最終決戦が待ち受けている。");
+                System.out.println("────────────────────────────────────────────────────");
+                // System.out.println("【ステージ3】終焉の城");
+                // System.out.println("闇の勢力の本拠地、終焉の城に辿り着いた。");
+                // System.out.println("ここで最終決戦が待ち受けている。");
                 break;
         }
     }
 
     /**
      * キャラクターの対話
+     * 
      * @param wizard 魔法使い
-     * @param enemy 敵
+     * @param enemy  敵
      */
     public static void characterDialogue(Wizard wizard, Enemy enemy) {
         System.out.println(); // 改行
@@ -306,20 +346,23 @@ public class Main extends Object {
 
     /**
      * ストーリーの終了
+     * 
      * @param victory 勝利したかどうか
      */
     public static void endStory(boolean victory) {
         if (victory) {
-            System.out.println(); // 改行
+            System.out.println("\n・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…\n");
             System.out.println("【エンディング】");
             System.out.println("あなたは闇の勢力を打ち破り、世界に平和を取り戻した。");
             System.out.println("しかし、その戦いの代償として、多くの仲間を失った…");
             System.out.println("これからも続くであろう困難な道を、あなたは歩み続ける。");
+            System.out.println("\n・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…\n");
         } else {
-            System.out.println(); // 改行
+            System.out.println("\n・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…\n");
             System.out.println("【ゲームオーバー】");
             System.out.println("あなたは闇の勢力に敗北し、世界は完全に闇に包まれた。");
             System.out.println("しかし、希望はまだ残っている。再び挑戦し、世界を救うのだ！");
+            System.out.println("\n・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…・‥…━…‥・‥…━…‥・‥…━…‥・‥…━…‥・‥…\n");
         }
     }
 

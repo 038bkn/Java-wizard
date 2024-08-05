@@ -6,7 +6,7 @@ public class WizardWater extends Wizard {
      * コンストラクタ
      */
     public WizardWater(String backStory, int mp) {
-        super("水の精霊と契約を結び、不老不死の力を得た。過去の失われた愛を取り戻すために旅を続ける。\n", mp);
+        super("水の精霊と契約を結び、不老不死の力を得た。\n過去の失われた愛を取り戻すために旅を続ける。\n", mp);
         this.normalAttackMpCost = 15; // 通常攻撃のMPコスト
         this.specialAttackMpCost = 40; // 必殺技のMPコスト
     }
@@ -41,7 +41,7 @@ public class WizardWater extends Wizard {
     @Override
     public int specialAbility(Random random, int targetHp) {
         System.out.println(super.getName() + "は「滅氷の大波（フローズン・カタクラズマ）」を放った！");
-        System.out.println("深淵の氷が全てを裁く時、君の運命も冷徹に決まる！凍りつく絶望を感じるがいい！");
+        System.out.println("「深淵の氷が全てを裁く時、君の運命も冷徹に決まる！凍りつく絶望を感じるがいい！」");
         int damage = super.specialAbility(random, targetHp);
         return damage;// 攻撃力
     }

@@ -84,8 +84,10 @@ public abstract class Wizard extends Object {
      * @param backstory
      */
     public void printBackstory() {
-        System.out.println("【" + this.name + "の背景】");
+        System.out.println("\n∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴");
+        System.out.println("\n【" + this.name + "の背景】");
         System.out.println(this.backStory);
+        System.out.println("∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴‥∵‥∴‥∴‥∵‥∴\n");
     }
 
     /**
