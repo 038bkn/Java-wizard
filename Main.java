@@ -54,7 +54,7 @@ public class Main extends Object {
      * @return 選択した魔法使い
      */
     public static Wizard selectWizard(Scanner scanner) {
-        
+
         while (true) {
             // 水の魔法使いか火の魔法使いを選択
             System.out.println("呼び出す魔法使いの属性を選択してください。");
@@ -153,6 +153,12 @@ public class Main extends Object {
         }
     }
 
+    /**
+     * ステータスを表示
+     * 
+     * @param wizard 魔法使い
+     * @param enemy  敵
+     */
     public static void printStatus(Wizard wizard, Enemy enemy) {
         System.out.println(wizard.getName() + " のHP：" + wizard.getHp());
         System.out.println(wizard.getName() + " のMP：" + wizard.getMp());
@@ -193,6 +199,7 @@ public class Main extends Object {
                 continue;
             }
 
+            // 魔法使いの行動
             switch (action) {
                 case 1:
                     System.out.println(); // 改行
@@ -246,6 +253,9 @@ public class Main extends Object {
         }
     }
 
+    /**
+     * ストーリーを開始
+     */
     public static void startStory() {
         System.out.println("遠い昔、世界は光と闇の均衡により保たれていた…");
         System.out.println("しかし、闇の勢力がその均衡を破り、世界を混沌に陥れた。");
@@ -253,6 +263,10 @@ public class Main extends Object {
         System.out.println("古の魔導書に記された力を駆使し、世界を救う旅に出るのだ。\n");
     }
 
+    /**
+     * 敵ごとのステージの説明
+     * @param stage ステージ
+     */
     public static void advanceStory(int stage) {
         switch (stage) {
             case 1:
@@ -276,12 +290,21 @@ public class Main extends Object {
         }
     }
 
+    /**
+     * キャラクターの対話
+     * @param wizard 魔法使い
+     * @param enemy 敵
+     */
     public static void characterDialogue(Wizard wizard, Enemy enemy) {
         System.out.println(); // 改行
         System.out.println(enemy.getName() + ": 「お前如きが我を倒せると思うか？」");
         System.out.println(wizard.getName() + ": 「闇に染まったお前を、この手で葬る！」");
     }
 
+    /**
+     * ストーリーの終了
+     * @param victory 勝利したかどうか
+     */
     public static void endStory(boolean victory) {
         if (victory) {
             System.out.println(); // 改行
