@@ -6,7 +6,7 @@ public class WizardFire extends Wizard {
      * コンストラクタ
      */
     public WizardFire(String backStory, int mp) {
-        super("焔魔族の末裔。\n幼少期に両親を闇の勢力に奪われ、復讐の念に燃える。", mp); // 親クラスのコンストラクタを呼び出す
+        super("焔魔族の末裔。\n幼少期に両親を闇の勢力に奪われ、復讐の念に燃える。\n", mp); // 親クラスのコンストラクタを呼び出す
         this.normalAttackMpCost = 15; // 通常攻撃のMPコスト
         this.specialAttackMpCost = 40; // 必殺技のMPコスト
     }
