@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class GameUtils extends Object {
 
-    public static Random random = new Random(); // Randomクラスのインスタンスを生成    
+    public static Random random = new Random(); // Randomクラスのインスタンスを生成
 
     /**
      * 魔法使いを選択する
@@ -287,15 +287,42 @@ public class GameUtils extends Object {
     }
 
     /**
-     * キャラクターの対話
+     * 戦闘前の対話イベント
      * 
      * @param wizard 魔法使い
      * @param enemy  敵
      */
     public static void characterDialogue(Wizard wizard, Enemy enemy) {
-        System.out.println(); // 改行
-        System.out.println(enemy.getName() + ": 「お前如きが我を倒せると思うか？」");
-        System.out.println(wizard.getName() + ": 「闇に染まったお前を、この手で葬る！」");
+
+        int dialogueChoice = random.nextInt(5); // 5つの会話パターンの中からランダムに選択
+
+        switch (dialogueChoice) {
+            case 0:
+                System.out.println(); // 改行
+                System.out.println(enemy.getName() + ": 「お前如きが我を倒せると思うか？」");
+                System.out.println(wizard.getName() + ": 「闇に染まったお前を、この手で葬る！」");
+                break;
+            case 1:
+                System.out.println(); // 改行
+                System.out.println(enemy.getName() + ": 「我が力を侮るなよ！」");
+                System.out.println(wizard.getName() + ": 「お前の闇を打ち破るのは、私の使命だ！」");
+                break;
+            case 2:
+                System.out.println(); // 改行
+                System.out.println(enemy.getName() + ": 「この闇の中で、お前に希望などない！」");
+                System.out.println(wizard.getName() + ": 「希望は心にあるもの。お前にはわかるまい！」");
+                break;
+            case 3:
+                System.out.println(); // 改行
+                System.out.println(enemy.getName() + ": 「お前の力では、私には敵わない！」");
+                System.out.println(wizard.getName() + ": 「力だけではない。心の強さも見せてやる！」");
+                break;
+            case 4:
+                System.out.println(); // 改行
+                System.out.println(enemy.getName() + ": 「この世界は闇に包まれる運命だ！」");
+                System.out.println(wizard.getName() + ": 「その運命を変えるために、私は戦う！」");
+                break;
+        }
     }
 
     /**
