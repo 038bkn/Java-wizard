@@ -11,6 +11,9 @@ public class WizardWater extends Wizard {
         this.specialAttackMpCost = 40; // 必殺技のMPコスト
     }
 
+    /**
+     * 通常攻撃1
+     */
     @Override
     public int attack1(Random random) {
         System.out.println(super.getName() + "は「氷結の裂帛【アイス・シャードスラスト】」で攻撃した！");
@@ -19,6 +22,9 @@ public class WizardWater extends Wizard {
         return damage;// 攻撃力
     }
 
+    /**
+     * 通常攻撃2
+     */
     @Override
     public int attack2(Random random) {
         System.out.println(super.getName() + "は「蒼海の槍（アクアスピア）で攻撃した！");
@@ -27,6 +33,9 @@ public class WizardWater extends Wizard {
         return damage;// 攻撃力
     }
 
+    /**
+     * 通常攻撃3
+     */
     @Override
     public int attack3(Random random) {
         System.out.println(super.getName() + "は「深淵の氷の裁き（アビスアイス・ジャッジメント）」で攻撃した！");
